@@ -1,0 +1,227 @@
+pipeline {
+    agent any
+    options {
+        disableConcurrentBuilds()
+    }
+    parameters {
+        choice(
+            choices: ['LoggerFEBuild' , 'LoggerFERevert'],
+            description: '',
+            name: 'REQUESTED_ACTION')
+    }
+
+    environment {
+        ENVEXECFILE = "http://192.168.1.140:3000/INFINITI/support-playbook.git"
+        ENVDELFILE = ""
+        GITEAURL = "http://192.168.1.140:3000/INFINITI/support-playbook.git"
+        USERNAME_PASSWORD = credentials("0e3b896a-8542-487b-ad04-2ba5d47c3ce8")
+        MYSQL_CREDENTIALS = credentials("4859d2d7-60a2-43c8-bffa-0e0d8566eaf6")
+        PRODUCT_NAME = "GRM LOGGER"
+        REPOSITORY_NAME = "GRM_Logger"
+        SERVER_IP = "3.121.187.192"
+        SERVER_NAME = "GRM_CommonPack_php73_Mysql8_Server"
+        SERVER_FOLDER_PATH = "/home/Staging/GRM_LOGGER_FRONTEND_DEV"
+        DOCSTRING=""
+    }
+    stages {
+         stage('RevertLoggerFEBuild') {
+           when {
+                beforeInput true
+                expression { params.REQUESTED_ACTION == 'LoggerFERevert' }
+            }
+           input {
+                message 'Please enter build number to revert LoggerFE React build ?'
+                parameters {
+                    string(name: 'angularrevertbuild_number', defaultValue: '', description: 'Enter your Job build number to revert angular build ?')
+                }
+            }
+
+
+            steps {
+                wrap([$class: 'BuildUser']) {
+                    echo 'Building Zip files..'
+                    script {
+                        if (env.angularrevertbuild_number) {
+                            echo "angularrevertbuild_number is the ${angularrevertbuild_number}"
+                        }
+                    }
+
+                    sh '''
+                        echo "sudo cd /home/Staging/GRM_LOGGER_FRONTEND_DEV" > angularrevertscript_$BUILD_NUMBER.sh
+                        echo "sudo cp -R support-playbook support-playbook_$BUILD_NUMBER" >> angularrevertscript_$BUILD_NUMBER.sh
+                        echo "sudo rm -rf support-playbook" >> angularrevertscript_$BUILD_NUMBER.sh
+                        echo "sudo cp -R support-playbook_${angularrevertbuild_number} support-playbook" >> angularrevertscript_$BUILD_NUMBER.sh
+
+
+                        mkdir -p angularrevert
+                        sudo chmod -R 777 angularrevert
+                        sudo mv angularrevertscript_$BUILD_NUMBER.sh angularrevert/angularrevertscript_$BUILD_NUMBER.sh
+                        sudo chmod -R 777 angularrevert     
+                        #make zip file to execute in server
+                        cd angularrevert
+                        sudo zip -r angularrevertjob_$BUILD_NUMBER.zip angularrevertscript_$BUILD_NUMBER.sh
+                        sudo rm -f angularrevertscript_$BUILD_NUMBER.sh
+
+                        '''
+                }
+            }
+        }
+
+stage('LoggerFE React Build Code') {
+                  when {
+                beforeInput true
+                expression { params.REQUESTED_ACTION == 'LoggerFEBuild' }
+            }
+            input {
+                message 'Please enter tag name to build  ?'
+                parameters {
+                    string(name: 'tag_name', defaultValue: '', description: 'Enter your tag name to build ?')               
+                }
+              }
+            
+            steps {
+                wrap([$class: 'BuildUser']) {
+                    echo 'Building React Tag..'
+                    sh '''
+                           
+                   echo "$tag_name"                                                    
+    	            git fetch
+                    git fetch --tags
+    	            git archive --format=tar.gz $tag_name >$tag_name.tar.gz
+    	            mkdir build 
+    	            tar -xf $tag_name.tar.gz -C build
+    	            rm -rf $tag_name.tar.gz
+    	            cd build
+                    tar -cJf dist.tar.xz dist
+    	            mv dist.tar.xz ../
+    	            cd ..    	                                                                    
+                   #make build directoy
+                   mkdir -p $WORKSPACE/tagbuild
+                   chmod -R 777 $WORKSPACE/tagbuild
+                   mv dist.tar.xz tagbuild/dist.tar.xz
+                   rm -rf build
+                        '''
+               }
+            }
+        } 
+      
+         stage('Revert to previous LoggerFE React Build') {
+          when {
+                beforeInput true
+                expression { params.REQUESTED_ACTION == 'LoggerFERevert' }
+            }
+
+
+        input {
+                message 'Do you want to revert previous React build in server? - (For Yes - enter "Y", No - enter "N")? Kindly approve the revert?'
+                ok "Approve"
+                parameters {
+                    string(name: 'is_angularrevert_need', defaultValue: '', description: 'Enter your choice for build ?')  
+ 
+                }
+                submitter "balaji,kaviyarasan,pradeep"
+                submitterParameter 'approved_user' 
+                
+            }
+            
+            steps('Revert previous angular build to server') {
+                wrap([$class: 'BuildUser']) {
+                       script {
+                        if (env.is_angularrevert_need == 'Y' || env.is_angularrevert_need == 'y' || env.is_angularrevert_need == 'Yes') {
+                        sshPublisher(
+                            publishers: [
+                                sshPublisherDesc(
+                                    configName: 'GRM_CommonPack_php73_Mysql8_Server', 
+                                    transfers: [
+                                        sshTransfer(
+                                            cleanRemote: false,
+                                            excludes: '', 
+                                            execCommand: 'cd /home/Staging/GRM_LOGGER_FRONTEND_DEV && unzip -o angularrevertjob_$BUILD_NUMBER.zip && rm -f angularrevertjob_$BUILD_NUMBER.zip.zip && sudo chmod 777 angularrevertscript_$BUILD_NUMBER.sh && sh angularrevertscript_$BUILD_NUMBER.sh && rm -f *.zip && rm -f angularrevertscript_$BUILD_NUMBER.sh && sudo chmod -R 777 *', 
+                                            execTimeout: 30000, 
+                                            flatten: false, 
+                                            makeEmptyDirs: false, 
+                                            noDefaultExcludes: false, 
+                                            patternSeparator: '[, ]+', 
+                                            remoteDirectory: '//home/Staging/GRM_LOGGER_FRONTEND_DEV/', 
+                                            remoteDirectorySDF: false, 
+                                            removePrefix: 'angularrevert', 
+                                            sourceFiles: 'angularrevert/angularrevertjob_$BUILD_NUMBER.zip'
+                                        )
+                                    ], 
+                                    usePromotionTimestamp: false, 
+                                    useWorkspaceInPromotion: false, 
+                                    verbose: true
+                                )
+                            ]
+                        )
+                    }
+                }
+	        }
+        }
+    }
+               stage('Build & Move LoggerFE React code') {
+          when {
+                beforeInput true
+                expression { params.REQUESTED_ACTION == 'LoggerFEBuild' }
+            }
+            input {
+                message 'Do you want move the LoggerFE react build files? - (For Yes - enter "Y", No - enter "N")? Kindly approve the file movement?'
+                ok "Approve"
+                parameters {
+                    string(name: 'is_build_need', defaultValue: '', description: 'Enter your choice for angular build ?')   
+                }
+                submitter "balaji,kaviyarasan,pradeep"
+                submitterParameter 'approved_user' 
+            }
+            
+            steps {
+                wrap([$class: 'BuildUser']) {
+                    echo 'Building Angular files..'
+                    script {
+                        if (env.is_build_need == 'Y' || env.is_build_need == 'y' || env.is_build_need == 'Yes') { 
+                            sshPublisher(
+                                publishers: [
+                                    sshPublisherDesc(
+                                        configName: 'GRM_CommonPack_php73_Mysql8_Server', 
+                                        transfers: [
+                                            sshTransfer(
+                                                cleanRemote: false,
+                                                excludes: '', 
+                                                execCommand: 'cd /home/Staging/GRM_LOGGER_FRONTEND_DEV && mv support-playbook support-playbook_$BUILD_NUMBER && tar xf dist.tar.xz && mv dist support-playbook && sudo chmod -R 777 /home/Staging/GRM_LOGGER_FRONTEND_DEV/support-playbook', 
+                                                execTimeout: 30000, 
+                                                flatten: false, 
+                                                makeEmptyDirs: false, 
+                                                noDefaultExcludes: false, 
+                                                patternSeparator: '[, ]+', 
+                                                remoteDirectory: '//home/Staging/GRM_LOGGER_FRONTEND_DEV/', 
+                                                remoteDirectorySDF: false, 
+                                                removePrefix: 'tagbuild', 
+                                                sourceFiles: 'tagbuild/dist.tar.xz'
+                                            )
+                                        ], 
+                                        usePromotionTimestamp: false, 
+                                        useWorkspaceInPromotion: false, 
+                                        verbose: true
+                                    )
+                                ]
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }    
+    post { 
+        always {
+          script {
+            if (env.REQUESTED_ACTION == 'LoggerFEBuild') {
+
+            echo "Final Output --> ${currentBuild.result}"
+           }
+          else {
+           echo 'Files reverted'
+           }
+           }
+        }
+    }
+}

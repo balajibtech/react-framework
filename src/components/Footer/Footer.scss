@@ -1,0 +1,9 @@
+.cls-footer{
+    padding-block: 20px;
+    background-color: var(--t-footer-bg);
+    margin-block-start: 20px;
+
+    .ant-typography{
+        color: var(--t-color-white);
+    }
+}

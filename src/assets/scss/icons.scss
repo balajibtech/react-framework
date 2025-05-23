@@ -1,0 +1,267 @@
+@font-face {
+    font-family: 'InfiSpIcons';
+    src: url('../fonts/infi_icons/infi-sp-icons.eot?nebnnh');
+    src: url('../fonts/infi_icons/infi-sp-icons.eot?nebnnh#iefix') format('embedded-opentype'),
+        url('../fonts/infi_icons/infi-sp-icons.ttf?nebnnh') format('truetype'),
+        url('../fonts/infi_icons/infi-sp-icons.woff?nebnnh') format('woff'),
+        url('../fonts/infi_icons/infi-sp-icons.svg?nebnnh#InfiSpIcons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="Infi-"],
+[class*=" Infi-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'InfiSpIcons' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.Infi-Sp_01_Expand:before {
+    content: "\e900";
+}
+
+.Infi-Sp_02_Search:before {
+    content: "\e901";
+}
+
+.Infi-Sp_03_CloseIcon:before {
+    content: "\e902";
+}
+
+.Infi-Sp_04_Edit:before {
+    content: "\e903";
+}
+
+.Infi-Sp_05_Info:before {
+    content: "\e904";
+}
+
+.Infi-Sp_06_Plus:before {
+    content: "\e905";
+}
+
+.Infi-Sp_07_ThinCloseIcon:before {
+    content: "\e906";
+}
+
+.Infi-Sp_08_Cancel:before {
+    content: "\e907";
+}
+
+.Infi-Sp_09_NotificationBell:before {
+    content: "\e908";
+}
+
+.Infi-Sp_10_Upload:before {
+    content: "\e909";
+}
+
+.Infi-Sp_11_FlightStart:before {
+    content: "\e90a";
+}
+
+.Infi-Sp_12_EditFill:before {
+    content: "\e90b";
+}
+
+.Infi-Sp_13_Calender:before {
+    content: "\e90c";
+}
+
+.Infi-Sp_14_Light:before {
+    content: "\e90d";
+}
+
+.Infi-Sp_15_Dark:before {
+    content: "\e90e";
+}
+
+.Infi-Sp_16_TableExpand:before {
+    content: "\e90f";
+}
+
+.Infi-Sp_17_TableCollapse:before {
+    content: "\e910";
+}
+
+.Infi-Sp_18_InfoBold:before {
+    content: "\e911";
+}
+
+.Infi-Sp_19_RespMenu:before {
+    content: "\e912";
+}
+
+.Infi-Sp_20_Tick:before {
+    content: "\e913";
+}
+
+.Infi-Sp_21_Garbage:before {
+    content: "\e914";
+}
+
+.Infi-Sp_22_Reset:before {
+    content: "\e915";
+}
+
+.Infi-Sp_23_Refresh:before {
+    content: "\e916";
+}
+
+.Infi-Sp_24_OpenEye:before {
+    content: "\e917";
+}
+
+.Infi-Sp_25_Trip:before {
+    content: "\e918";
+}
+
+.Infi-Sp_26_Filter:before {
+    content: "\e919";
+}
+
+.Infi-Sp_27_FutureTime:before {
+    content: "\e91a";
+}
+
+.Infi-Sp_28_Clock:before {
+    content: "\e91b";
+}
+
+.Infi-Sp_29_RightArrow:before {
+    content: "\e91c";
+}
+
+.Infi-Sp_30_CloseMark:before {
+    content: "\e91d";
+}
+
+.Infi-Sp_31_ParallelArrow:before {
+    content: "\e91e";
+}
+
+.Infi-Sp_32_DownIndicator:before {
+    content: "\e91f";
+}
+
+.Infi-Sp_33_Share:before {
+    content: "\e920";
+}
+
+.Infi-Sp_34_Adult:before {
+    content: "\e921";
+}
+
+.Infi-Sp_35_Child:before {
+    content: "\e922";
+}
+
+.Infi-Sp_36_Infant:before {
+    content: "\e923";
+}
+
+.Infi-Sp_37_Chat:before {
+    content: "\e924";
+}
+
+.Infi-Sp_38_Copy:before {
+    content: "\e925";
+}
+
+.Infi-Sp_39_Global:before {
+    content: "\e926";
+}
+
+.Infi-Sp_40_Notification:before {
+    content: "\e927";
+}
+
+.Infi-Sp_41_Upload:before {
+    content: "\e928";
+}
+
+.Infi-Sp_42_Download:before {
+    content: "\e929";
+}
+
+.Infi-Sp_43_Mail:before {
+    content: "\e92a";
+}
+
+.Infi-Sp_44_Telephone:before {
+    content: "\e92b";
+}
+
+.Infi-Sp_45_Logout:before {
+    content: "\e92c";
+}
+
+.Infi-Sp_46_Theme:before {
+    content: "\e92d";
+}
+
+.Infi-Sp_47_DropdownArrow:before {
+    content: "\e92e";
+}
+
+.Infi-Sp_48_Garbage:before {
+    content: "\e92f";
+}
+
+.Infi-Sp_49_SuccessIcon:before {
+    content: "\e930";
+}
+
+.Infi-Sp_50_User:before {
+    content: "\e931";
+}
+
+.Infi-Sp_51_Printer:before {
+    content: "\e932";
+}
+
+.Infi-Sp_52_BgArrow:before {
+    content: "\e933";
+}
+
+.Infi-Sp_53_Warning:before {
+    content: "\e934";
+}
+
+.Infi-Sp_54_RoundedPlusBg:before {
+    content: "\e935";
+}
+
+.Infi-Sp_55_Document:before {
+    content: "\e936";
+}
+
+.Infi-Sp_56_Lock:before {
+    content: "\e937";
+}
+
+.Infi-Sp_57_FileAccepted:before {
+    content: "\e938";
+}
+
+.Infi-Sp_58_Alert:before {
+    content: "\e939";
+}
+
+.Infi-Sp_59_Question:before {
+    content: "\e93a";
+}
+
+.Infi-Sp_60_Stop:before {
+    content: "\e93b";
+}

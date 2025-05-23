@@ -1,0 +1,37 @@
+{
+  "bar": [
+    {
+      "name": "Initial login",
+      "responseTime": 40,
+      "category2": 24,
+      "category3": 19
+    },
+    {
+      "name": "Well-known",
+      "responseTime": 30,
+      "category2": 12,
+      "category3": 24
+    },
+    {
+      "name": "User info",
+      "responseTime": 44,
+      "category2": 50,
+      "category3": 18
+    },
+    {
+      "name": "Token",
+      "responseTime": 17,
+      "category2": 24,
+      "category3": 40
+    }
+  ],
+  "line": [
+    { "time": "00:00", "P50": 40, "P70": 30, "P99": 35 },
+    { "time": "04:00", "P50": 38, "P70": 28, "P99": 34 },
+    { "time": "08:00", "P50": 35, "P70": 26, "P99": 33 },
+    { "time": "12:00", "P50": 40, "P70": 30, "P99": 35 },
+    { "time": "16:00", "P50": 45, "P70": 55, "P99": 36 },
+    { "time": "20:00", "P50": 40, "P70": 30, "P99": 34 },
+    { "time": "24:00", "P50": 20, "P70": 28, "P99": 32 }
+  ]
+}

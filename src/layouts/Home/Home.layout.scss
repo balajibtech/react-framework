@@ -1,0 +1,67 @@
+.cls-homeLayout {
+    min-height: 100vh;
+    .ant-layout-header {
+        background-color: var(--ant-color-bg-container);
+    }
+    .ant-menu-vertical {
+        .ant-menu-submenu-title, .ant-menu-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 10px 12px;
+            width: 100%;
+            height: max-content;
+            min-height: 80px;
+            border-radius: 0;
+            border-block-end: 1px solid var(--t-menu-border);
+            &.ant-menu-item-selected {
+                background-color: var(--t-common-primary);
+                .anticon {
+                    svg {
+                        fill: var(--t-color-white)
+                    }
+                }
+                .ant-menu-title-content {
+                    color: var(--t-color-white);
+                }
+            }
+            .ant-menu-title-content {
+                display: block;
+                line-height: 1.25;
+                text-align: center;
+                text-wrap: auto;
+                margin: 0;
+                width: 100%;
+            }
+            .anticon {
+                svg {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+            .ant-menu-title-content {
+                font-size: 13px;
+                font-family: var(--font-regular);
+            }
+            .ant-menu-submenu-arrow {
+                inset-inline-end: 10px;
+            }
+        }
+    }
+    .ant-menu-horizontal {
+        display: flex;
+        justify-content: center;
+        border-block-end: 0;
+        line-height: 3;
+
+        .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected):hover, 
+        .ant-menu .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected):hover, 
+        .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected) >.ant-menu-submenu-title:hover,
+        .ant-menu .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected) > .ant-menu-submenu-title:hover {
+            color: var(--t-common-secondary);
+        }
+    }
+}

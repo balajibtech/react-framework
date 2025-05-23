@@ -1,0 +1,39 @@
+/** 
+  * Info:
+  * All fonts must have the following weights included: light, regular, medium, semibold, bold
+  * If any of the specified weights are not found in the font files, please create duplicate versions of the nearest available weight(s) and name them as the missing weight(s).
+  * Example: If semibold is missing, duplicate the medium weight file and name it as 'fontfamily-semibold'.
+  * This will ensure proper font-weight rendering across all browser environments and for all use cases. 
+  **/
+
+  $fonts: (
+    inter,
+    opensans,
+    googlesans,
+    quichesans,
+    roboto
+  );
+  
+  $weights: (
+    light,
+    regular,
+    medium,
+    semibold,
+    bold
+  );
+  
+  @each $family in $fonts {
+    @each $weight in $weights {
+      @font-face {
+        font-family: '#{$family}-#{$weight}';
+        src: url('../fonts/#{$family}/#{$family}-#{$weight}.eot');
+        src: url('../fonts/#{$family}/#{$family}-#{$weight}.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/#{$family}/#{$family}-#{$weight}.woff') format('woff'),
+             url('../fonts/#{$family}/#{$family}-#{$weight}.woff2') format('woff2'),
+             url('../fonts/#{$family}/#{$family}-#{$weight}.ttf') format('truetype'),
+             url('../fonts/#{$family}/#{$family}-#{$weight}.svg##{$family}-#{$weight}') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    }
+  }

@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "main": "Navegación principal",
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "admin": "Administrador",
+    "toggleTheme": "Cambiar Tema",
+    "language": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español"
+  },
+  "footer": {
+    "title": "Pie de página",
+    "copyright": "© 2025 Tu Aplicación"
+  },
+  "home": {
+    "title": "Página de Inicio",
+    "welcome": "¡Bienvenido a la Página de Inicio!"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "content": "Este es tu panel."
+  },
+  "admin": {
+    "nav": "Navegación de administrador",
+    "users": "Usuarios",
+    "settings": "Configuraciones",
+    "usersContent": "Gestiona usuarios aquí.",
+    "settingsContent": "Ajusta configuraciones aquí."
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "submit": "Iniciar Sesión"
+  }
+}

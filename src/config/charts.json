@@ -1,0 +1,21 @@
+{
+  "charts": {
+    "dashboard": [
+      {
+        "type": "area",
+        "title": "Overall Growth",
+        "col": 8,
+        "chartData": [
+          { "dataKey": "overall", "stroke": "var(--t-common-secondary)", "fill": "var(--t-common-secondary)" },
+          { "dataKey": "monthly", "stroke": "var(--t-common-primary)", "fill": "var(--t-common-primary)" },
+          { "dataKey": "daily", "stroke": "var(--t-common-primary-lt)", "fill": "var(--t-common-primary-lt)" }
+        ],
+        "statistics": [
+          { "dataKey": "Overall Growth", "dataValueKey": "overAllGrowth" },
+          { "dataKey": "Monthly", "dataValueKey": "monthly" },
+          { "dataKey": "Day", "dataValueKey": "day" }
+        ]
+      }
+    ]
+  }
+}

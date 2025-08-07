@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "main": "Main navigation",
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "toggleTheme": "Toggle Theme",
+    "language": "Language",
+    "english": "English",
+    "spanish": "Spanish"
+  },
+  "footer": {
+    "title": "Footer",
+    "copyright": "© 2025 Your App"
+  },
+  "home": {
+    "title": "Home Page",
+    "welcome": "Welcome to the Home Page!"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "content": "This is your dashboard."
+  },
+  "admin": {
+    "nav": "Admin navigation",
+    "users": "Users",
+    "settings": "Settings",
+    "usersContent": "Manage users here.",
+    "settingsContent": "Adjust settings here."
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login"
+  }
+}

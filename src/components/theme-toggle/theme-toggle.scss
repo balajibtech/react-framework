@@ -1,0 +1,10 @@
+.theme-toggle {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--ant-primary-color, #1677ff); // Use Ant Design primary color
+  &:hover {
+    color: var(--ant-primary-color-hover, #4096ff);
+    background: var(--ant-bg-color, #f5f5f5);
+  }
+}

@@ -3,30 +3,77 @@ import {
   Layout,
   theme as antdTheme,
   Input,
+  Badge,
+  Dropdown,
   Space,
   Avatar,
-  Badge,
 } from "antd";
-import { UserOutlined, BellOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  BellOutlined,
+  SettingOutlined,
+  DownOutlined,
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { useState } from "react";
+
 import { useTranslation } from "react-i18next";
 import AdminSidebar from "../../components/admin-sidebar/admin-sidebar";
 import "./admin-layout.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import LanguageSelect from "../../components/language-select/language-select";
+import ThemeToggle from "../../components/theme-toggle/theme-toggle";
 
 const { Sider, Content, Header } = Layout;
 
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [theme, setTheme] = useState<"light" | "dark">(
+    import.meta.env.VITE_DEFAULT_THEME || "light"
+  );
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  // Placeholder for logged-in user - replace with your auth logic
+  const [loggedInUser, setLoggedInUser] = useState<{ username: string } | null>(
+    { username: "AdminUser" }
+  ); // Simulate a logged-in user
+
+  const handleLogout = () => {
+    // Implement your logout logic here
+    console.log("Admin logging out...");
+    setLoggedInUser(null); // Simulate logout
+    // Redirect to login page or homepage after logout
+    navigate('/login');
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "theme",
+      label: <ThemeToggle theme={theme} toggleTheme={toggleTheme} />,
+      // You would typically have a ThemeToggle component here
+    },
+    {
+      key: "language",
+      label: <LanguageSelect />,
+      // You would typically have a LanguageSelect component here
+    },
+    {
+      key: "logout",
+      label: <a onClick={handleLogout}>{t("logout")}</a>,
+    },
+  ];
 
   return (
     <ConfigProvider
       theme={{
-        algorithm: antdTheme.defaultAlgorithm,
-        token: {
-          colorPrimary: "#7B61FF",
-          borderRadius: 16,
-          colorBgContainer: "#F6F7FB",
-        },
+        algorithm:
+          theme === "light"
+            ? antdTheme.defaultAlgorithm
+            : antdTheme.darkAlgorithm,
       }}
     >
       <Layout className="admin-layout" style={{ minHeight: "100vh" }}>
@@ -74,7 +121,19 @@ const AdminLayout: React.FC = () => {
                 <BellOutlined style={{ fontSize: 20 }} />
               </Badge>
               <SettingOutlined style={{ fontSize: 20 }} />
-              <Avatar size={40} icon={<UserOutlined />} />
+              {loggedInUser ? (
+                <Dropdown menu={{ items }} trigger={["click"]}>
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <Avatar size={40} icon={<UserOutlined />} />
+                      {loggedInUser.username}
+                      <DownOutlined />
+                    </Space>
+                  </a>
+                </Dropdown>
+              ) : (
+                <Avatar size={40} icon={<UserOutlined />} />
+              )}
             </Space>
           </Header>
           <Content

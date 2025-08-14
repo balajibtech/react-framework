@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ConfigProvider, theme as antdTheme, Layout, Button } from "antd";
+import {
+  ConfigProvider,
+  theme as antdTheme,
+  Layout,
+  Button,
+} from "antd";
 // Example for MainLayout and AdminLayout
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -31,16 +36,15 @@ const MainLayout: React.FC = () => {
       <Layout className="main-layout">
         <Header className="main-header">
           <div className="main-header__left">
-            <span className="logo">Logo</span>
+            <span className="logo">SAGE</span>
             <MenuNavigation theme={theme} toggleTheme={toggleTheme} />
           </div>
-          <Button
-            type="primary"
-            shape="round"
-            size="large"
-            className="signup-btn"
-            onClick={() => navigate("/login")}
-          >
+            <Button
+              type="primary"
+              shape="round"
+              size="large"
+              className="signup-btn"
+              onClick={() => navigate("/login")}>
             {t("login.title")}
           </Button>
         </Header>
@@ -58,3 +62,4 @@ const MainLayout: React.FC = () => {
 };
 
 export default MainLayout;
+

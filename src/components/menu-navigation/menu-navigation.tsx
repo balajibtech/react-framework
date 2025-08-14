@@ -15,23 +15,31 @@ const MenuNavigation: React.FC<ThemeToggleProps> = ({ theme, toggleTheme }) => {
   const location = useLocation();
 
   return (
-    <Row className="menu-navigation" gutter={[16, 16]} align="middle">
-      {menuItems.map((item) => (
-        <Col key={item.key}>
-          <Link
-            to={item.path}
-            aria-label={t(item.labelKey)}
-            className={location.pathname.startsWith(item.path) ? "active" : ""}
-          >
-            {t(item.labelKey)}
-          </Link>
-        </Col>
-      ))}
+    <Row className="menu-navigation" align="middle" justify="space-between">
       <Col>
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        <Row gutter={[16, 16]} align="middle">
+          {menuItems.map((item) => (
+            <Col key={item.key}>
+              <Link
+                to={item.path}
+                aria-label={t(item.labelKey)}
+                className={location.pathname.startsWith(item.path) ? "active" : ""}
+              >
+                {t(item.labelKey)}
+              </Link>
+            </Col>
+          ))}
+        </Row>
       </Col>
       <Col>
-        <LanguageSelect />
+        <Row gutter={[16, 16]} align="middle">
+          <Col>
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          </Col>
+          <Col>
+            <LanguageSelect />
+          </Col>
+        </Row>
       </Col>
     </Row>
   );
